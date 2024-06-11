@@ -6,6 +6,6 @@ Source code for the work "Approximate Gradient Coding Using Convex Optimization"
 
 - Python 3.11.5
 - CVXPY 1.4.1
-- GUROBI 11.0.2
-- NETWORKX 3.3
-- NUMPY 1.26.0
+- Gurobi Optimizer 11.0.2
+- NetworkX 3.3
+- NumPy 1.26.0
