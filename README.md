@@ -33,6 +33,12 @@ For given `n` and `d`, to compare the upper bounds of different schemes with the
 ```sh
 python OptvsFixed.py n d itr
 ```
-Again, `Itr` is the number of optimization problems run for the circulant matrix case. We find the bad straggler set for which the optimal error is high in the following way:  First we pick a random data subset $i \in [n]$. We then determine the set that consists of all the workers the subset was assigned to. Then we determine another subset which is assigned to the maximum number of workers from the determined set. We then update the set by taking the union of the set and the set of workers the determined subset is assigned to. If the size of the updated set  is greater than $s$, we take a subset of the updated set of size $s$. Otherwise, we continue this process until the size of the set reaches the number of stragglers $s$.  
+Again, `Itr` is the number of optimization problems run for the circulant matrix case. 
+
+We find the bad straggler set for which the optimal error is high in the following way:  First we pick a random data subset $i \in [n]$. We then determine the set that consists of all the workers the subset was assigned to. Then we determine another subset which is assigned to the maximum number of workers from the determined set. We then update the set by taking the union of the set and the set of workers the determined subset is assigned to. If the size of the updated set  is greater than $s$, we take a subset of the updated set of size $s$. Otherwise, we continue this process until the size of the set reaches the number of stragglers $s$.  
+
+
+
+
 
 
