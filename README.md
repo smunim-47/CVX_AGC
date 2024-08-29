@@ -33,34 +33,6 @@ For given `n` and `d`, to compare the upper bounds of different schemes with the
 ```sh
 python OptvsFixed.py n d itr
 ```
-Again, `Itr` is the number of optimization problems run for the circulant matrix case. The algorithm to find the bad straggler set is the following: 
-
-$\begin{algorithm}
-\caption{Finding the straggler set for subsection V-B}\label{alg:example}
-\begin{algorithmic}[1]
-\STATE \textbf{Input:} Number of stragglers $s = a\delta$, where $a \in \mathbb{N}$
-\STATE \textbf{Output:} A set of stragglers $[n] \setminus \mathcal{F}$ of size $s$ for which the optimal error is relatively high 
-\STATE Pick a random $i \in [n]$ and set $\mathcal{F} =  [n]\setminus\text{supp}(\mathbf{B}(i,:))$ and $\mathcal{P} = \{i\}$
-
-\WHILE{$|[n]  \setminus \mathcal{F}| < s$}
-
-\STATE Find $h$ such that $|([n]\setminus \mathcal{F}) \cap \text{supp}(\mathbf{B}(h,:))| \ge |([n]\setminus \mathcal{F}) \cap \text{supp}(\mathbf{B}(j,:))|$ for each $j \in \mathcal{P}$
-\IF{$| ([n]\setminus \mathcal{F}) \cup \text{supp}(\mathbf{B}(h,:))| > s$}
-\STATE Choose $\mathcal{H} \subset \text{supp}(\mathbf{B}(h,:)) \setminus ([n] \setminus \mathcal{F})$ such that $|([n] \setminus \mathcal{F}) \cup \mathcal{H}| = s$
-
-\STATE Set $\mathcal{F} = [n] \setminus (([n] \setminus \mathcal{F}) \cup \mathcal{H})$
-
-\ELSE
-\STATE Set $\mathcal{F} = [n] \setminus (([n] \setminus \mathcal{F}) \cup \text{supp}(\mathbf{B}(h,:)))$
-\STATE set $\mathcal{P} = \mathcal{P} \cup \{h\}$
-\ENDIF
-
-\ENDWHILE
+Again, `Itr` is the number of optimization problems run for the circulant matrix case. We find the bad straggler set for which the optimal error is high in the following way:  First we pick a random data subset $i \in [n]$. We then determine the set that consists of all the workers the subset was assigned to. Then we determine another subset which is assigned to the maximum number of workers from the determined set. We then update the set by taking the union of the set and the set of workers the determined subset is assigned to. If the size of the updated set  is greater than $s$, we take a subset of the updated set of size $s$. Otherwise, we continue this process until the size of the set reaches the number of stragglers $s$.  
 
 
-
- 
-\RETURN $[n] \setminus \mathcal{F}$
-
-\end{algorithmic}
-\end{algorithm}$
